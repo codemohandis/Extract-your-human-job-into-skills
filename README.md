@@ -32,7 +32,7 @@ python process_audio.py --history
 
 ## 📺 Learn by Watching
 
-**[▶ Watch the Tutorial](https://placeholder.video/tutorial)** *(Click to see the complete workflow in action)*
+**[▶ Watch the Tutorial](https://www.loom.com/share/6713fb71cc504fc0bddb0b083aead99d)** *(Click to see the complete workflow in action)*
 
 ---
 

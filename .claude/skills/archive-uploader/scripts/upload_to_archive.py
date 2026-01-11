@@ -383,6 +383,8 @@ def main():
                        help="Target collection (default: opensource_audio)")
     parser.add_argument("--dry-run", action="store_true",
                        help="Show what would be uploaded without uploading")
+    parser.add_argument("--skip-thumbnail", action="store_true",
+                       help="Skip thumbnail generation and upload")
 
     args = parser.parse_args()
 
@@ -402,7 +404,8 @@ def main():
         args.description,
         args.tags,
         args.collection,
-        args.dry_run
+        args.dry_run,
+        generate_cover=not args.skip_thumbnail
     )
 
     sys.exit(0 if success else 1)

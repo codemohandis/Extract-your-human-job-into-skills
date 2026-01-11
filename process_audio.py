@@ -134,7 +134,7 @@ def step_tag_metadata(folder: Path, config: dict, dry_run: bool = False) -> bool
     return success > 0
 
 
-def step_upload(folder: Path, config: dict, dry_run: bool = False) -> bool:
+def step_upload(folder: Path, config: dict, dry_run: bool = False, skip_thumbnail: bool = False) -> bool:
     """Step 2: Upload using archive-uploader skill."""
     print("\n[STEP 2] Uploading to archive.org...")
 
@@ -165,7 +165,8 @@ def step_upload(folder: Path, config: dict, dry_run: bool = False) -> bool:
         tags=tags,
         collection=defaults["collection"],
         dry_run=dry_run,
-        auto_move=False  # We handle move in step 3
+        auto_move=False,  # We handle move in step 3
+        generate_cover=not skip_thumbnail
     )
 
     if success and not dry_run:
@@ -196,7 +197,7 @@ def step_move_to_done(folder: Path, config: dict, dry_run: bool = False) -> bool
 # ============================================================
 
 def process_folder(folder: Path, config: dict, tag_only: bool = False,
-                   upload_only: bool = False, dry_run: bool = False) -> bool:
+                   upload_only: bool = False, dry_run: bool = False, skip_thumbnail: bool = False) -> bool:
     """Process a single folder through the pipeline."""
     print("=" * 60)
     print(f"Processing: {folder.name}")
@@ -216,7 +217,7 @@ def process_folder(folder: Path, config: dict, tag_only: bool = False,
         return True
 
     # Step 2: Upload to archive.org
-    if not step_upload(folder, config, dry_run):
+    if not step_upload(folder, config, dry_run, skip_thumbnail):
         return False
 
     # Step 3: Move to done folder
@@ -229,7 +230,7 @@ def process_folder(folder: Path, config: dict, tag_only: bool = False,
     return True
 
 
-def process_all(config: dict, dry_run: bool = False) -> int:
+def process_all(config: dict, dry_run: bool = False, skip_thumbnail: bool = False) -> int:
     """Process all folders in input directory."""
     input_folder = Path(__file__).parent / config["folders"]["input"]
 
@@ -247,7 +248,7 @@ def process_all(config: dict, dry_run: bool = False) -> int:
 
     success_count = 0
     for folder in sorted(folders):
-        if process_folder(folder, config, dry_run=dry_run):
+        if process_folder(folder, config, dry_run=dry_run, skip_thumbnail=skip_thumbnail):
             success_count += 1
         print()
 
@@ -276,6 +277,7 @@ Examples:
     parser.add_argument("--tag-only", action="store_true", help="Only edit metadata, don't upload")
     parser.add_argument("--upload-only", action="store_true", help="Only upload, skip metadata")
     parser.add_argument("--dry-run", action="store_true", help="Preview without making changes")
+    parser.add_argument("--skip-thumbnail", action="store_true", help="Skip thumbnail generation during upload")
     parser.add_argument("--history", action="store_true", help="Show upload history")
 
     args = parser.parse_args()
@@ -300,7 +302,7 @@ Examples:
 
     # Process all folders
     if args.all:
-        process_all(config, args.dry_run)
+        process_all(config, args.dry_run, args.skip_thumbnail)
         return
 
     # Process single folder
@@ -308,7 +310,7 @@ Examples:
         parser.print_help()
         sys.exit(1)
 
-    process_folder(args.folder, config, args.tag_only, args.upload_only, args.dry_run)
+    process_folder(args.folder, config, args.tag_only, args.upload_only, args.dry_run, args.skip_thumbnail)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,6 @@
+{
+  "extraPaths": [
+    ".claude/skills/audio-metadata-editor/scripts",
+    ".claude/skills/archive-uploader/scripts"
+  ]
+}

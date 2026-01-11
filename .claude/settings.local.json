@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"C:\\Users\\hijaz trd\\Documents\\code\\AI-Driven Development with Python and Agentic AI Project\\01_Extract Your Human Job Into Skills\\app.py\")",
+      "Bash(PYTHONUTF8=1 python:*)",
+      "Bash(python:*)",
+      "Bash(del /f \"C:\\Users\\hijaz trd\\Documents\\code\\AI-P300 Project\\01_Extract Your Human Job Into Skills\\nul\")",
+      "Bash(find:*)",
+      "Bash(del \"C:\\Users\\hijaz trd\\Documents\\code\\AI-P300 Project\\01_Extract Your Human Job Into Skills\\fetch_account_items.py\")",
+      "Bash(rm:*)"
+    ]
+  }
+}

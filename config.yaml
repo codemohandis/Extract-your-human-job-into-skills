@@ -1,0 +1,32 @@
+# Audio Processing Configuration
+# Used by all skills in this project
+
+defaults:
+  # Speaker/Artist information
+  artist: "Sheikh Mohammad Mohsin"
+  album: "Al Fiqh ul Ahwat Lecture Series"
+
+  # Metadata
+  genre: "Islamic Jurisprudence"
+  language: "Urdu"
+
+  # Archive.org settings
+  collection: "opensource_audio"
+
+  # Tags (semicolon-separated)
+  base_tags: "Islamic Lecture; Fiqh; Urdu; Al Fiqh ul Ahwat; Sheikh Mohammad Mohsin"
+
+folders:
+  # Input folder for pending audio
+  input: "audio_folders"
+
+  # Output folder after successful upload
+  done: "audio-uploaded-done"
+
+# File patterns
+patterns:
+  # Filename pattern: Chapter_Dars XX.mp3
+  filename_regex: "^(?P<chapter>.+?)_Dars\\s+(?P<num>\\d+)\\.(?P<ext>mp3|m4a|wav)$"
+
+  # Folder pattern: XX_Chapter-Name (NN)
+  folder_regex: "^(?P<num>\\d+)_(?P<chapter>.+?)\\s*\\((?P<count>\\d+)\\)$"

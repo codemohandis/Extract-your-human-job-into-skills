@@ -50,9 +50,14 @@ python process_audio.py --history
 
 ### 3️⃣ **Upload to archive.org** (`archive-uploader`)
    - Batch uploads to Internet Archive
-   - Auto-generates thumbnails and descriptions
+   - Auto-generates titles, descriptions, tags
    - Resumable uploads (if interrupted, just re-run)
    - Automatic duplicate detection
+
+### 4️⃣ **Generate Thumbnails** (Optional, Separate) (`generate-thumbnail`)
+   - Create professional cover images for archive.org
+   - Run separately BEFORE uploading (if desired)
+   - Multiple color templates available (Islamic, Modern, Minimal)
 
 ---
 
@@ -255,7 +260,7 @@ folders:
 - ✅ **Duplicate Detection** - Skip already-uploaded items
 - ✅ **Dry-Run Mode** - Preview changes before applying
 - ✅ **Auto-Organization** - Folders move to "done" after upload
-- ✅ **Thumbnail Generation** - Auto-creates cover images
+- ✅ **Optional Thumbnails** - Separate script for cover image generation
 - ✅ **Upload History** - Track all uploads in `upload_history.json`
 - ✅ **Cross-Platform** - Works on Windows, macOS, Linux
 
@@ -286,6 +291,30 @@ See individual skill documentation for more options:
 - [Urdu Audio Renamer Docs](/.claude/skills/urdu-audio-renamer/README.md)
 - [Audio Metadata Editor Docs](/.claude/skills/audio-metadata-editor/README.md)
 - [Archive Uploader Docs](/.claude/skills/archive-uploader/README.md)
+
+### Generate Thumbnails (Optional)
+
+Thumbnail generation is **completely separate** from the upload process. Run this BEFORE uploading if you want cover images:
+
+```bash
+# Generate thumbnail with default Islamic template
+python .claude/skills/archive-uploader/scripts/generate_thumbnail_standalone.py <folder>
+
+# Use a different color template
+python .claude/skills/archive-uploader/scripts/generate_thumbnail_standalone.py <folder> \
+  --template modern
+
+# Custom output filename
+python .claude/skills/archive-uploader/scripts/generate_thumbnail_standalone.py <folder> \
+  --output cover.jpg
+```
+
+**Available templates:** `islamic` (default), `modern`, `minimal`
+
+**Why separate?** Thumbnail generation can cause rate-limiting issues on archive.org. By keeping it separate, you can:
+- Upload quickly without thumbnails
+- Generate thumbnails later if needed
+- Choose when/if to include them
 
 ---
 
@@ -340,7 +369,7 @@ Each upload creates an archive.org item with:
 | **Title** | `<Chapter#> <Chapter Name> Lecture Series` | `21 Al Shurb e Khamr Lecture Series` |
 | **Identifier** | `<chapter#>-<name>-lecture-series` | `21-al-shurb-e-khamr-lecture-series` |
 | **URL** | `https://archive.org/details/{identifier}` | [View Example](https://archive.org/details/21-al-shurb-e-khamr-lecture-series) |
-| **Files** | All audio + thumbnail | MP3 files + cover image |
+| **Files** | All audio files (+ optional thumbnail) | MP3 files (with optional cover image) |
 | **Metadata** | Searchable tags | Islamic Lecture, Fiqh, Urdu, etc. |
 
 ### View Your Uploads
@@ -478,16 +507,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Duration:** ~15 minutes | **Difficulty:** Beginner-Friendly
 
----
-
-<div align="center">
-
-### ⭐ If you find this useful, please [star the repository](https://github.com/your-repo) ⭐
-
-### 🚀 [Get Started Now →](##-get-started-now)
-
----
-
-**Extract Your Human Job Into Skills** © 2024 | Made with ❤️ for the Islamic education community
-
-</div>

@@ -219,8 +219,7 @@ def upload_to_archive(
     collection: str = "opensource_audio",
     dry_run: bool = False,
     auto_move: bool = True,
-    done_folder: Path | None = None,
-    generate_cover: bool = True
+    done_folder: Path | None = None
 ) -> bool:
     """Upload folder contents to archive.org with checkpointing support."""
 
@@ -289,19 +288,6 @@ def upload_to_archive(
         print("\nAll files already uploaded!")
         clear_checkpoint(identifier)
         return True
-
-    # Generate thumbnail if enabled
-    thumbnail_path = None
-    if generate_cover and "thumbnail.jpg" not in uploaded_files:
-        try:
-            from generate_thumbnail import generate_thumbnail as gen_thumb
-            print("\nGenerating cover image...")
-            thumbnail_path = gen_thumb(folder, creator=creator)
-            files_to_upload.insert(0, thumbnail_path)  # Upload thumbnail first
-        except ImportError:
-            print("  [SKIP] Thumbnail generation not available (install Pillow)")
-        except Exception as e:
-            print(f"  [WARN] Could not generate thumbnail: {e}")
 
     # Upload files one by one with checkpointing
     print("\nUploading...")
@@ -383,8 +369,6 @@ def main():
                        help="Target collection (default: opensource_audio)")
     parser.add_argument("--dry-run", action="store_true",
                        help="Show what would be uploaded without uploading")
-    parser.add_argument("--skip-thumbnail", action="store_true",
-                       help="Skip thumbnail generation and upload")
 
     args = parser.parse_args()
 
@@ -404,8 +388,7 @@ def main():
         args.description,
         args.tags,
         args.collection,
-        args.dry_run,
-        generate_cover=not args.skip_thumbnail
+        args.dry_run
     )
 
     sys.exit(0 if success else 1)

@@ -7,7 +7,12 @@
       "Bash(del /f \"C:\\Users\\hijaz trd\\Documents\\code\\AI-P300 Project\\01_Extract Your Human Job Into Skills\\nul\")",
       "Bash(find:*)",
       "Bash(del \"C:\\Users\\hijaz trd\\Documents\\code\\AI-P300 Project\\01_Extract Your Human Job Into Skills\\fetch_account_items.py\")",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(set PYTHONIOENCODING=utf-8:*)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Unified Audio Processing Pipeline
 
@@ -21,6 +22,12 @@ from datetime import datetime
 from pathlib import Path
 
 import yaml
+
+# Fix for Windows console UTF-8 encoding
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Add skills to path for importing
 SKILLS_PATH = Path(__file__).parent / ".claude" / "skills"

@@ -496,7 +496,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🎬 Video Tutorial
 
-### [▶ Watch Full Tutorial](https://placeholder.video/tutorial)
+### [▶ Watch Full Tutorial]([https://placeholder.video/tutorial](https://www.loom.com/share/6713fb71cc504fc0bddb0b083aead99d))
 
 **In this video, you'll learn:**
 - ✅ How to install and configure

@@ -137,7 +137,7 @@ python scripts/upload_to_archive.py audio_folders/21_Al-Shurb-e-Khamr \
 #   ✓ Success
 #
 # Upload complete!
-# URL: https://archive.org/details/21-al-shurb-e-khamr-lecture-series
+# URL: https://archive.org/details/al-shurb-e-khamr-lecture-series
 # Moved to: audio-uploaded-done/21_Al-Shurb-e-Khamr (02)
 ```
 
@@ -237,7 +237,7 @@ Contains 3 lectures in Urdu.
 
 Auto-generated tags include:
 - Chapter name keywords
-- Base tags: "Islamic Lecture; Fiqh; Urdu"
+- Base tags: "Islamic Lecture; Fiqh-ul-Ahwat,Shah syed mohammad Noorbakhsh,noorbakhshia, Urdu"
 - Speaker name (from creator)
 - User-provided tags
 
